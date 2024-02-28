@@ -26,10 +26,10 @@ function App() {
             gsap.from('.easy_food02', {scale: 0, y: '100%', x: '-80%', rotate: -90, ease: 'back.out'}),
         ], 0.5)
         introTl.from('.easy_ttls .ttl_up', {y: '100%', stagger: 0.25}, '-=0.3')
-
+       
 
         gsap.timeline({
-            ScrollTrigger: {
+            scrollTrigger: {
                 trigger: '.fran',
                 start: 'top 60%',
             },
@@ -38,6 +38,51 @@ function App() {
         .from('.fran_box02 .box_cover', {y: '100%', duration: 0.7}, '-=0.5')
         .from('.fran_box03 .box_cover', {y: '-100%', duration: 0.7}, '-=0.5')
        
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.tasty',
+                start: 'top bottom',
+                end: 'center 30%',
+                scrub: 1
+            },
+        })
+        .from('.tasty_img', {y: '100%'})
+
+
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.speed_head',
+                start: 'top center',
+            },
+        })
+        .from('.speed_ttl02 .ttl_img', {opacity: 0, x: '100%', ease: 'expo.in'})
+
+
+        var speedMin = document.querySelectorAll('.speed_time .min').height();
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.speed_time',
+                start: 'top 60%',
+            },
+        })
+        .addLabel('speedTl')
+        .fromTo('.speed_svg', {strokeDasharray: 276*Math.PI, strokeDashoffset: 276*Math.PI}, {strokeDashoffset: 276*Math.PI*0.5, ease: 'none', duration: 2.6}, 'speedTl')
+        .add([
+            gsap.from('.speed_imgs .coffee', {opacity: 0, x: '50%', ease: 'power.out(4)'}),
+            gsap.to('.speed_time .min', {backgroundPositionY: -speedMin, duration: 0.3})
+        ], 'speedTl+=0.3')
+        .add([
+            gsap.from('.speed01 .dessert', {opacity: 0, x: '50%', ease: 'expo.in'}),
+            gsap.from('.speed_stamp', {opacity: 0, scale: 2, ease: 'expo.in'}),
+            gsap.to('.speed_time .min', {backgroundPositionY: -speedMin*2, duration: 0.3}),
+        ], 'speedTl+=0.6')
+        .to('.speed_time .min', {backgroundPositionY: -speedMin*7, duration: 1.3}, 'speedTl+=1.2')
+        .from('.speed02 .dessert', {opacity: 0, x: '50%'}, 'speedTl+=2.5')
+        .to('.speed02 .speed_imgs, .speed_time', {filter: 'grayscale(0.8)'}, 'speedTl+=2.8')
+
 
   
     }, { scope: container }) 
