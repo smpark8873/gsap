@@ -58,9 +58,8 @@ function App() {
             },
         })
         .from('.speed_ttl02 .ttl_img', {opacity: 0, x: '100%', ease: 'expo.in'})
-
-
-        var speedMin = document.querySelectorAll('.speed_time .min').height();
+        
+        const speedMin = document.querySelector('.speed_time .min').clientHeight;
 
         gsap.timeline({
             scrollTrigger: {
