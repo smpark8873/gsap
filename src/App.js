@@ -3,9 +3,9 @@ import gsap from "gsap"; // <-- import GSAP
 import { useGSAP } from "@gsap/react"; // <-- import the hook from our React package
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade } from 'swiper/modules';
+import { Autoplay, EffectFade } from 'swiper/modules';
 import Marquee from "react-fast-marquee";
-
+// import useDynamicRefs from 'use-dynamic-refs';
 
 import 'swiper/css';
 import './style.css';
@@ -14,6 +14,8 @@ import './App.css';
 function App() {
     const container = useRef();
     gsap.registerPlugin(ScrollTrigger);
+   
+    // const [getRef, setRef] =  useDynamicRefs();
 
     useGSAP(() => {
         // gsap code here...
@@ -86,7 +88,6 @@ function App() {
   
     }, { scope: container }) 
 
-
     return (
         <div id="wrap" ref={container}>    
             <header className="header">
@@ -95,8 +96,7 @@ function App() {
                     <a href="fran.asp.html#none" className="hd_sns abs"><img src="/img/common/hd_sns.png" alt="바나타이거 인스타 바로가기" /></a>
                     <p className="hd_tel abs">가맹문의 1600.4458</p>
                 </div>
-            </header>
-
+            </header>             
             <main className="container">
                 <article className="loading" >
                     <div className="box">
@@ -128,13 +128,16 @@ function App() {
                                 <span className="btm_bg abs"></span>
                                 <div className="easy_slide l50">
                                     <span className="easy_rotate rotate abs"><img src="/img/page/fran/easy_rotate.png" alt="" /></span>
-                                    <Swiper modules={[EffectFade]} 
-                                        effect="fade"
-                                        loop = "true"
-                                        centeredSlides= "true"
-                                        allowTouchMove= "false"
-                                        speed="800"
-                                        autoplay={{ delay: 1800, disableOnInteraction: false }}
+                                    <Swiper modules={[Autoplay, EffectFade]} 
+                                        //effect="fade"
+                                        // loop = {true}
+                                        // centeredSlides={false}
+                                        // allowTouchMove= {false}
+                                        //speed="800"
+                                        autoplay={{
+                                            delay: 1800,
+                                            disableOnInteraction: false,
+                                          }}
                                         fadeEffect= {{crossFade: true}}                                      
                                     >
                                         <SwiperSlide><img src="/img/page/fran/easy_sl01.png" alt="" /></SwiperSlide>
@@ -359,7 +362,7 @@ function App() {
                         <p className="speed_txt02 txt20">습관처럼 즐겨찾는 커피의 선택 포인트는 결국 속도입니다.</p>
                         <div className="speed_time rel">
                             <img src="/img/page/fran/speed_time.png" alt="주문 후" />
-                            <span className="min abs"></span>
+                            <span className="min abs" ></span>
                             <div className="speed_svg abs">
                                 {/* <svg viewBox="0 0 276 276" width="276" height="276">
                                     <defs>
