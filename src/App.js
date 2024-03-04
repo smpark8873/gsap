@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {  Autoplay, EffectFade } from 'swiper/modules';
 import gsap from "gsap"; // <-- import GSAP
 import { useGSAP } from "@gsap/react"; // <-- import the hook from our React package
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper/modules';
 import Marquee from "react-fast-marquee";
 // import useDynamicRefs from 'use-dynamic-refs';
 
@@ -52,7 +52,7 @@ function App() {
         .from('.tasty_img', {y: '100%'})
 
 
-
+        //speed
         gsap.timeline({
             scrollTrigger: {
                 trigger: '.speed_head',
@@ -83,6 +83,100 @@ function App() {
         .to('.speed_time .min', {backgroundPositionY: -speedMin*7, duration: 1.3}, 'speedTl+=1.2')
         .from('.speed02 .dessert', {opacity: 0, x: '50%'}, 'speedTl+=2.5')
         .to('.speed02 .speed_imgs, .speed_time', {filter: 'grayscale(0.8)'}, 'speedTl+=2.8')
+
+        //cafe
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.cafe_inn',
+                start: 'top 80%',
+            },
+        })
+        .add([
+            gsap.from('.cafe01 .cafe_inn', {opacity: 0, x: '30%', ease: 'expo.in'}),
+            gsap.from('.cafe03 .cafe_inn', {opacity: 0, x: '-30%', ease: 'expo.in'}),
+        ])
+        .addLabel('cafeTl')
+        .from('.cafe01_nums', {opacity: 0, y: 60, stagger: 0.3})
+        .from('.cafe01_stamp img', {opacity: 0, scale: 2, ease: 'expo.in'})
+        .from('.cafe03 .ico', {opacity: 0, x: -50, stagger: 0.2}, 'cafeTl')
+
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.suc',
+                start: 'top center',
+                end: 'bottom bottom',
+                scrub: 1
+            },
+        })
+        .add([
+            gsap.to('.cafe02_store .store_img', {y: 994, width: 603, height: 580}),
+            gsap.to('.cafe02_store .store_img img', {opacity: 0.4}),
+        ])
+
+
+        //suc
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.suc_cont',
+                start: 'top 85%',
+            },
+        })
+        .add([
+            gsap.from('.suc_dsrt01', {opacity: 0, x: '70%', ease: 'expo.in'}),
+            gsap.from('.suc_dsrt02', {opacity: 0, x: '-70%', ease: 'expo.in'}),
+        ])
+        .add([
+            gsap.from('.suc_deco01', {scale: 0, x: '100%', duration: 0.7, ease: 'back.out(3)', transformOrigin: 'right bottom'}),
+            gsap.from('.suc_deco02', {scale: 0, x: '-100%', duration: 0.7, ease: 'back.out(3)', transformOrigin: 'left bottom'}),
+        ])
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.suc_cont',
+                start: 'top 75%',
+            },
+        })
+        .from('.suc_lis', {opacity: 0, y: '80%', duration: 0.7, ease: 'back.out'});
+
+
+        //dlvr
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.dlvr',
+                start: 'top center',
+            },
+        })
+        .add([
+            gsap.from('.dlvr01_stamp img', {opacity: 0, scale: 2, ease: 'expo.in'}),
+            gsap.from('.dlvr01_box02 .cir_bg', {scale: 1.2, duration: 1.5}),
+        ])
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.dlvr02_head',
+                start: 'center 70%',
+                end: 'center 45%',
+                scrub: 1
+            },
+        })
+        .to('.dlvr02_rotate', {rotate: 180})
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.dlvr02_box',
+                start: 'top 55%',
+            },
+        })
+        .from('.dlvr02_box .box_li', {opacity: 0, y: '80%', stagger: 0.2})
+
+
+        let tl = gsap.timeline({});
+
+        tl.to('.dlvr02_lines .wing_line:nth-child(1)', {scaleY: 0, y: document.querySelector('.dlvr02_lines').clientHeight, duration: 0.9, repeat: -1})
+        tl.to('.dlvr02_lines .wing_line:nth-child(2)', {scaleY: 0, y: document.querySelector('.dlvr02_lines').clientHeight, duration: 0.9, repeat: -1}, 0.3)
+        tl.to('.dlvr02_lines .wing_line:nth-child(3)', {scaleY: 0, y: document.querySelector('.dlvr02_lines').clientHeight, duration: 0.9, repeat: -1}, 0.6)
+        tl.to('.dlvr02_lines .wing_line:nth-child(4)', {scaleY: 0, y: document.querySelector('.dlvr02_lines').clientHeight, duration: 0.9, repeat: -1}, 0.9)
 
 
   
@@ -128,24 +222,26 @@ function App() {
                                 <span className="btm_bg abs"></span>
                                 <div className="easy_slide l50">
                                     <span className="easy_rotate rotate abs"><img src="/img/page/fran/easy_rotate.png" alt="" /></span>
-                                    <Swiper modules={[Autoplay, EffectFade]} 
-                                        //effect="fade"
-                                        // loop = {true}
-                                        // centeredSlides={false}
-                                        // allowTouchMove= {false}
-                                        //speed="800"
+                                    <Swiper
+                                        spaceBetween={30}
+                                        effect={'fade'}
+                                        navigation={true}
+                                        pagination={{
+                                        clickable: true,
+                                        }}
                                         autoplay={{
                                             delay: 1800,
                                             disableOnInteraction: false,
-                                          }}
-                                        fadeEffect= {{crossFade: true}}                                      
+                                        }}
+                                        modules={[Autoplay, EffectFade]}
+                                        className="mySwiper"
                                     >
                                         <SwiperSlide><img src="/img/page/fran/easy_sl01.png" alt="" /></SwiperSlide>
                                         <SwiperSlide><img src="/img/page/fran/easy_sl02.png" alt="" /></SwiperSlide>
                                         <SwiperSlide><img src="/img/page/fran/easy_sl03.png" alt="" /></SwiperSlide>
                                         <SwiperSlide><img src="/img/page/fran/easy_sl04.png" alt="" /></SwiperSlide>
                                         <SwiperSlide><img src="/img/page/fran/easy_sl05.png" alt="" /></SwiperSlide>
-                                        <SwiperSlide><img src="/img/page/fran/easy_sl06.png" alt="" /></SwiperSlide>                                
+                                        <SwiperSlide><img src="/img/page/fran/easy_sl06.png" alt="" /></SwiperSlide> 
                                     </Swiper>
                                 </div>
                                 <p className="btm_txt fs_def rel">
@@ -239,7 +335,7 @@ function App() {
                             </div>
                         </li>
                     </ul>
-                    <Marquee speed={2} className="fran_btm_flow flow_container">
+                    <Marquee speed="100" className="fran_btm_flow flow_container">
                         <span className="flow_item"><em className="lt">구산점</em> OPEN<em className="oblique">!</em></span>
                         <span className="flow_item"><em className="lt">연신내점</em> OPEN<em className="oblique">!</em></span>
                         <span className="flow_item"><em className="lt">시흥배곧점</em> OPEN<em className="oblique">!</em></span>
@@ -265,93 +361,102 @@ function App() {
                 <section className="menu bg-cover">
                     <div className="menu_slide rel">
                         <span className="menu_sl_bg l50"><img src="/img/page/fran/menu_sl_bg.png" alt="" /></span>
-                        <div className="swiper-container">
-                            <ul className="swiper-wrapper">
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl01.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Salted<br />
-                                        Butter<br />
-                                        Rolls
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl02.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Cream<br />
-                                        Teddybear<br />
-                                        Cake
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl03.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Choco<br />
-                                        Teddybear<br />
-                                        Cake
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl04.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Strawberry<br />
-                                        Croffle
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl05.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Shinemuscat<br />
-                                        Croffle
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl06.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Lotus<br />
-                                        Croffle
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl07.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Icecream<br />
-                                        Croffle
-                                    </p>
-                                </li>
-                                <li className="swiper-slide">
-                                    <div className="menu_sl">
-                                        <img src="/img/page/fran/menu_sl08.png" alt="" />
-                                    </div>
-                                    <p className="menu_txt abs">
-                                        Marlenka<br />
-                                        Cake
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
+                        <Swiper
+                            slidesPerView={'auto'}                           
+                            loop={true}                      
+                            centeredSlides={true}
+                            allowTouchMove={true}
+                            speed={800} 
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay]}                            
+                        >                          
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl01.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Salted<br />
+                                    Butter<br />
+                                    Rolls
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl02.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Cream<br />
+                                    Teddybear<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl03.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Choco<br />
+                                    Teddybear<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl04.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Strawberry<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl05.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Shinemuscat<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl06.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Lotus<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl07.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Icecream<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl08.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Marlenka<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>                           
+                        </Swiper>
                     </div>
                 </section>
                 
                 <section className="tasty rel">
-                    <div className="tasty_flow flow_container abs">
+                    <Marquee speed="100" className="tasty_flow flow_container abs">
                         <span className="flow_item" style={{width: '2455px'}}><img src="/img/page/fran/tasty_fl.png" alt="" /></span>
-                    </div>
-                    <div className="tasty_img bg-cover bg-full"></div>
+                    </Marquee>
+                    <div className="tasty_img bg-cover bg-full" style={{zIndex: '10'}}></div>
                 </section>
                 
                 <section className="speed t_center rel">
@@ -518,7 +623,7 @@ function App() {
                             <li className="suc_li"><img src="/img/page/fran/suc_li03.png" alt="시골 터줏대감이 된 진천점 1,470,274원 일 최고 홀 매출" /></li>
                         </ul>
                     </div>
-                    <div className="suc_flow flow_container">
+                    <Marquee speed="80" className="suc_flow flow_container">
                         <div className="flow_item"><img src="/img/page/fran/suc_fl01.png" alt="" /></div>
                         <div className="flow_item"><img src="/img/page/fran/suc_fl03.png" alt="" /></div>
                         <div className="flow_item"><img src="/img/page/fran/suc_fl04.png" alt="" /></div>
@@ -532,7 +637,7 @@ function App() {
                         <div className="flow_item"><img src="/img/page/fran/suc_fl12.png" alt="" /></div>
                         <div className="flow_item"><img src="/img/page/fran/suc_fl13.png" alt="" /></div>
                         <div className="flow_item"><img src="/img/page/fran/suc_fl14.png" alt="" /></div>
-                    </div>
+                    </Marquee>
                 </section>
                 
                 <div className="fixed_lyr bg-cover"></div>
@@ -627,9 +732,9 @@ function App() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="dlvr01_flow flow_container">
+                                <Marquee speed="80" className="dlvr01_flow flow_container">
                                     <p className="flow_item"><img src="/img/page/fran/dlvr01_fl.png" alt="#크로플 잘하는 집 # 가성비 커피 배달 # 인스타 감성 케익" /></p>
-                                </div>
+                                </Marquee>
                             </div>
                         </div>
                         <div className="dlvr01_stamp t_right abs">
