@@ -29,45 +29,27 @@ function Ease() {
                 slowV: 4,
             };
 
-            let numbers = []
-            let turning = opt.max - opt.min
+            let turning = opt.max - opt.min;
             let slowlyI = 0;
 
-            for (let i = 0; i < elems.length; i++) {
-                numbers[i] = elems[i].getAttribute('data-number');
+            const queue = (i, j, start) => {
+                j - (turning * (opt.loop - 1)) >= 0 ? slowlyI++ : slowlyI = 0;
+                let t = (j * opt.duration) + (i * opt.delay) + (Math.pow(slowlyI, 2) * opt.slowV);
+                setTimeout(() => {
+                    elems[i].style.backgroundPositionY = start * -opt.diff + 'px';
+                }, t);
             }
 
             for (let i = 0, start; i < elems.length; i++) {
-                start = parseInt(numbers[i]) + 1;
-
-                numbers[i] = [];
-            
+                start = parseInt(elems[i].getAttribute('data-number')) + 1;
                 for (let j = 0; j < turning * opt.loop; j++) {
                     if (start === turning){
                         start = opt.min;
                     }
-                    numbers[i][j] = start;
+                    queue(i, j, start);
                     start++;
                 }
             }
-
-            const play = () => {
-                for (let i = 0; i < elems.length; i++) {
-                    for (let j = 0; j < turning * opt.loop; j++) {
-                        queue(i, j);
-                    }
-                }
-            }
-
-            const queue = (i, j) => {
-                j - (turning * (opt.loop - 1)) >= 0 ? slowlyI++ : slowlyI = 0;
-                let t = (j * opt.duration) + (i * opt.delay) + (Math.pow(slowlyI, 2) * opt.slowV);
-                setTimeout(function() {
-                    elems[i].style.backgroundPositionY = numbers[i][j] * -opt.diff + 'px';
-                }, t);
-            }
-
-            play();
         })
     }, { scope: container }) 
 
