@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import {  Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {  Autoplay, EffectFade } from 'swiper/modules';
 import gsap from "gsap"; 
 import { useGSAP } from "@gsap/react"; 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,12 +8,7 @@ import Marquee from "react-fast-marquee";
 // import useDynamicRefs from 'use-dynamic-refs';
 
 // component
-import Ease from './pages/Ease';
-import Fran from './pages/Fran';
-import Menu from './pages/Menu';
-import Tasty from './pages/Tasty';
-
-
+import Ease from './pages/Ease'
 
 //style
 import 'swiper/css';
@@ -30,27 +25,24 @@ function App() {
         // gsap code here...
         // gsap.to(".logo", {rotation: 90}); // <-- automatically reverted
 
-        // let introTl = gsap.timeline({})
-        // introTl.from('.easy_cont', {y: '100%', duration: 1})
-        // introTl.add([
-        //     gsap.from('.easy_food01', {scale: 0, y: '100%', x: '100%', rotate: 90, ease: 'back.out'}),
-        //     gsap.from('.easy_food02', {scale: 0, y: '100%', x: '-80%', rotate: -90, ease: 'back.out'}),
-        // ], 0.5)
-        // introTl.from('.easy_ttls .ttl_up', {y: '100%', stagger: 0.25}, '-=0.3');  
-
-
-
-        // gsap.timeline({
-        //     scrollTrigger: {
-        //         trigger: '.fran',
-        //         start: 'top 60%',
-        //     },
-        // })
-        // .from('.fran_box01 .box_cover', {y: '-100%', duration: 0.7})
-        // .from('.fran_box02 .box_cover', {y: '100%', duration: 0.7}, '-=0.5')
-        // .from('.fran_box03 .box_cover', {y: '-100%', duration: 0.7}, '-=0.5')
+        let introTl = gsap.timeline({})
+        introTl.from('.easy_cont', {y: '100%', duration: 1})
+        introTl.add([
+            gsap.from('.easy_food01', {scale: 0, y: '100%', x: '100%', rotate: 90, ease: 'back.out'}),
+            gsap.from('.easy_food02', {scale: 0, y: '100%', x: '-80%', rotate: -90, ease: 'back.out'}),
+        ], 0.5)
+        introTl.from('.easy_ttls .ttl_up', {y: '100%', stagger: 0.25}, '-=0.3')
        
 
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.fran',
+                start: 'top 60%',
+            },
+        })
+        .from('.fran_box01 .box_cover', {y: '-100%', duration: 0.7})
+        .from('.fran_box02 .box_cover', {y: '100%', duration: 0.7}, '-=0.5')
+        .from('.fran_box03 .box_cover', {y: '-100%', duration: 0.7}, '-=0.5')
        
 
         gsap.timeline({
@@ -73,28 +65,28 @@ function App() {
         })
         .from('.speed_ttl02 .ttl_img', {opacity: 0, x: '100%', ease: 'expo.in'})
         
-        // const speedMin = document.querySelector('.speed_time .min').clientHeight;
+        const speedMin = document.querySelector('.speed_time .min').clientHeight;
 
-        // gsap.timeline({
-        //     scrollTrigger: {
-        //         trigger: '.speed_time',
-        //         start: 'top 60%',
-        //     },
-        // })
-        // .addLabel('speedTl')
-        // .fromTo('.speed_svg', {strokeDasharray: 276*Math.PI, strokeDashoffset: 276*Math.PI}, {strokeDashoffset: 276*Math.PI*0.5, ease: 'none', duration: 2.6}, 'speedTl')
-        // .add([
-        //     gsap.from('.speed_imgs .coffee', {opacity: 0, x: '50%', ease: 'power.out(4)'}),
-        //     gsap.to('.speed_time .min', {backgroundPositionY: -speedMin, duration: 0.3})
-        // ], 'speedTl+=0.3')
-        // .add([
-        //     gsap.from('.speed01 .dessert', {opacity: 0, x: '50%', ease: 'expo.in'}),
-        //     gsap.from('.speed_stamp', {opacity: 0, scale: 2, ease: 'expo.in'}),
-        //     gsap.to('.speed_time .min', {backgroundPositionY: -speedMin*2, duration: 0.3}),
-        // ], 'speedTl+=0.6')
-        // .to('.speed_time .min', {backgroundPositionY: -speedMin*7, duration: 1.3}, 'speedTl+=1.2')
-        // .from('.speed02 .dessert', {opacity: 0, x: '50%'}, 'speedTl+=2.5')
-        // .to('.speed02 .speed_imgs, .speed_time', {filter: 'grayscale(0.8)'}, 'speedTl+=2.8')
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.speed_time',
+                start: 'top 60%',
+            },
+        })
+        .addLabel('speedTl')
+        .fromTo('.speed_svg', {strokeDasharray: 276*Math.PI, strokeDashoffset: 276*Math.PI}, {strokeDashoffset: 276*Math.PI*0.5, ease: 'none', duration: 2.6}, 'speedTl')
+        .add([
+            gsap.from('.speed_imgs .coffee', {opacity: 0, x: '50%', ease: 'power.out(4)'}),
+            gsap.to('.speed_time .min', {backgroundPositionY: -speedMin, duration: 0.3})
+        ], 'speedTl+=0.3')
+        .add([
+            gsap.from('.speed01 .dessert', {opacity: 0, x: '50%', ease: 'expo.in'}),
+            gsap.from('.speed_stamp', {opacity: 0, scale: 2, ease: 'expo.in'}),
+            gsap.to('.speed_time .min', {backgroundPositionY: -speedMin*2, duration: 0.3}),
+        ], 'speedTl+=0.6')
+        .to('.speed_time .min', {backgroundPositionY: -speedMin*7, duration: 1.3}, 'speedTl+=1.2')
+        .from('.speed02 .dessert', {opacity: 0, x: '50%'}, 'speedTl+=2.5')
+        .to('.speed02 .speed_imgs, .speed_time', {filter: 'grayscale(0.8)'}, 'speedTl+=2.8')
 
         //cafe
         gsap.timeline({
@@ -230,11 +222,260 @@ function App() {
 
             <div id="content" className="content">
                 <Ease />
-                <Fran />
-                <Menu />
-                <Tasty />
                 
-              
+                <section className="fran">
+                    <ul className="fran_boxs fs_def">
+                        <li className="fran_box fran_box01">
+                            <div className="box_head">
+                                <p className="box_ttl sub40">
+                                    창업 비용 지원으로<br />
+                                    빠른 투자금 회수
+                                </p>
+                                <p className="box_txt">
+                                    적은 창업비용 + 지원금액으로<br />
+                                    <em>보다 빠른 투자금 회수가 가능</em>합니다.
+                                </p>
+                            </div>
+                            <div className="box01_shapes l50">
+                                <div className="shape1 ellipse">적은<br />창업비용</div>
+                                <div className="shape2 ellipse">창업비용<br />지원</div>
+                                <div className="dots">
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                </div>
+                                <div className="shape3">
+                                    <img src="/img/page/fran/fran_box01_banatiger.png" alt="banatiger coffee" />
+                                    <p>
+                                        <img src="/img/page/fran/fran_box01_text.png" alt="빠른 투자금 회수" />
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="box_cover bg-cover bg-full">
+                                <span className="cover_img l50">
+                                    <span className="cover_txt"><img src="/img/page/fran/fran_cover_txt01.png" alt="1YEAR" /></span>
+                                </span>
+                            </div>
+                        </li>
+                        <li className="fran_box fran_box02">
+                            <div className="box_head t_center">
+                                <p className="box_ttl sub40">
+                                    합리성을 갖춘<br />
+                                    독창적 창업
+                                </p>
+                                <p className="box_txt">
+                                    독창적인 콘셉트의 카페를<br />
+                                    <em>가장 합리적인 수준의 가격</em>으로 창업합니다.
+                                </p>
+                            </div>
+                            <div className="fran02_flow flow_container">
+                                <span className="flow_item" style={{width: '782px'}}><img src="/img/page/fran/fran02_fl.png" alt="" /></span>
+                            </div>
+                            <div className="fran02_img01 l50"><img src="/img/page/fran/fran02_img01.png" alt="" /></div>
+                            <div className="fran02_img02 l50"><img src="/img/page/fran/fran02_img02.png" alt="" /></div>
+                            <div className="fran02_img03 l50"><img src="/img/page/fran/fran02_img03.png" alt="" /></div>
+                            <div className="box_cover bg-cover bg-full">
+                                <span className="cover_img l50">
+                                    <span className="cover_txt"><img src="/img/page/fran/fran_cover_txt02.png" alt="1YEAR" /></span>
+                                </span>
+                            </div>
+                        </li>
+                        <li className="fran_box fran_box03">
+                            <div className="box_head">
+                                <p className="box_ttl sub40">
+                                    동반 성장을<br />
+                                    실천하는 진심
+                                </p>
+                                <p className="box_txt">
+                                    <em>창업비용 지원 금액인 1,700만원</em>으로<br />
+                                    더 좋은 상권에 투자할 수 있도록 권유드립니다.
+                                </p>
+                                <div className="fran03_cont rel">
+                                    <span className="fran03_cir fran03_cir01 abs">B급</span>
+                                    <span className="fran03_cir fran03_cir02 abs">C급</span>
+                                    <span className="fran03_cir fran03_cir03 abs">A급</span>
+                                    <span className="fran03_txts abs"><img src="/img/page/fran/fran03_txts_240201.png" alt="BANA TIGER +1,700만원" /></span>
+                                </div>
+                                <div className="box_cover bg-cover bg-full">
+                                    <span className="cover_img l50">
+                                        <span className="cover_txt l50"><img src="/img/page/fran/fran_cover_txt03.png" alt="1YEAR" /></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <Marquee speed="100" className="fran_btm_flow flow_container">
+                        <span className="flow_item"><em className="lt">구산점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">연신내점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">시흥배곧점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">아산배방점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">평택고덕국제신도시점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">김천혁신도시점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">수원하늘채점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">운정힐스테이트점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">일산역점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">상봉역점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">청주성화점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">송정역점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">진천점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">제천장락점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">신림양산점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">울산달동점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">안산와동점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">진해용원점</em> OPEN<em className="oblique">!</em></span>
+                        <span className="flow_item"><em className="lt">천안직산점</em> OPEN<em className="oblique">!</em></span>
+                    </Marquee>
+                </section>
+                
+                <section className="menu bg-cover">
+                    <div className="menu_slide rel">
+                        <span className="menu_sl_bg l50"><img src="/img/page/fran/menu_sl_bg.png" alt="" /></span>
+                        <Swiper
+                            slidesPerView={'auto'}                           
+                            loop={true}                      
+                            centeredSlides={true}
+                            allowTouchMove={true}
+                            speed={800} 
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay]}                            
+                        >                          
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl01.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Salted<br />
+                                    Butter<br />
+                                    Rolls
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl02.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Cream<br />
+                                    Teddybear<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl03.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Choco<br />
+                                    Teddybear<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl04.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Strawberry<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl05.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Shinemuscat<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl06.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Lotus<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl07.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Icecream<br />
+                                    Croffle
+                                </p>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="menu_sl">
+                                    <img src="/img/page/fran/menu_sl08.png" alt="" />
+                                </div>
+                                <p className="menu_txt abs">
+                                    Marlenka<br />
+                                    Cake
+                                </p>
+                            </SwiperSlide>                           
+                        </Swiper>
+                    </div>
+                </section>
+                
+                <section className="tasty rel">
+                    <Marquee speed="100" className="tasty_flow flow_container abs">
+                        <span className="flow_item" style={{width: '2455px'}}><img src="/img/page/fran/tasty_fl.png" alt="" /></span>
+                    </Marquee>
+                    <div className="tasty_img bg-cover bg-full" style={{zIndex: '10'}}></div>
+                </section>
+                
+                <section className="speed t_center rel">
+                    <div className="speed_head abs">
+                        <p className="speed_ttl01 ttl_wrap"><span className="ttl_up ttl70">커피는 습관이고</span></p>
+                        <p className="speed_ttl02 fs_def"><span className="ttl80">카페는</span><span className="ttl_img"><img src="/img/page/fran/speed_ttl_img.png" alt="속도전이다" /></span></p>
+                        <p className="speed_txt01 sub30">세계 어느 곳보다 빠름을 좋아하는 대한민국</p>
+                        <p className="speed_txt02 txt20">습관처럼 즐겨찾는 커피의 선택 포인트는 결국 속도입니다.</p>
+                        <div className="speed_time rel">
+                            <img src="/img/page/fran/speed_time.png" alt="주문 후" />
+                            <span className="min abs" ></span>
+                            <div className="speed_svg abs">
+                                {/* <svg viewBox="0 0 276 276" width="276" height="276">
+                                    <defs>
+                                        <pattern x="0" y="0" width="276" height="276" id="speedFill" patternUnits="userSpaceOnUse">
+                                            <image xlink:href="/img/page/fran/speed_cir.png" x="0" y="0" width="276" height="276" transform="rotate(90, 138, 138)"/>
+                                        </pattern>
+                                    </defs>
+                                    <circle cx="138" cy="138" r="69" fill="transparent" stroke="url('#speedFill')" stroke-width="138" className="speed_cir" transform="rotate(-90, 138, 138)"/>
+                                </svg> */}
+                            </div>
+                        </div>
+                        <a href="fran.asp.html#balance" className="speed_rotate l50"><img src="/img/page/fran/speed_rotate.png" alt="자세히 보기" /></a>
+                    </div>
+                    <div className="speed_wrap clearfix">
+                        <div className="speed01 f_left">
+                            <div className="speed_cont abs">
+                                <div className="speed_imgs rel">
+                                    <span className="coffee bg-full"><img src="/img/page/fran/speed_coffee01.png" alt="" /></span>
+                                    <span className="dessert abs"><img src="/img/page/fran/speed_dessert01_230828.png" alt="" /></span>
+                                    <span className="speed_stamp abs"><img src="/img/page/fran/speed_stamp.png" alt="2분만에 서빙 완료!" /></span>
+                                </div>
+                                <p className="cont_brand">바나타이거</p>
+                                <p className="cont_txt txt20">주문 후 함께 받는 <em>바나타이거의 빠름</em></p>
+                            </div>
+                        </div>
+                        <div className="speed02 f_left">
+                            <div className="speed_cont abs">
+                                <div className="speed_imgs rel">
+                                    <span className="coffee bg-full"><img src="/img/page/fran/speed_coffee02.png" alt="" /></span>
+                                    <span className="dessert bg-full"><img src="/img/page/fran/speed_dessert02.png" alt="" /></span>
+                                </div>
+                                <p className="cont_brand">경쟁 브랜드</p>
+                                <p className="cont_txt txt20">불편한 경험의 반복을 습관으로 할 사람은 없습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 
                 <section className="cafe rel t_center">
                     <div className="cafe_video bg-full bg-cover over_h">

@@ -29,7 +29,9 @@
 .fran_box .box_ttl{margin-bottom: 18px;line-height: 1.3}
 .fran_box .box_txt{font-size: 18px;line-height: 1.6666;letter-spacing: -0.03em}
 .fran_box .box_txt em{font-weight: 700}
-.fran_box .cover_img{top: 50%;display: flex;justify-content: center;align-items: center;width: 100%;transform: translate(-50%, -50%)}
+.fran_box .cover_img{top: 50%;display: flex; justify-content: center;align-items: center;width: 100%;transform: translate(-50%, -50%)}
+.fran_box .box_cover { z-index: 3; }
+/* .fran_box:hover .box_cover { transform: scale(0) !important; transform-origin: center;} */
 .box01_shapes{display: flex;align-items: center;bottom: 17px;width: 536px;height: 157px;margin-left: -268px}
 .box01_shapes .ellipse{display: flex;justify-content: center;align-items: center;width: 147px;height: 100px;background-repeat: no-repeat;font-weight: 700;font-size: 20px;line-height: 1.6;color: #faf3cd;text-align: center}
 .box01_shapes .shape1{position: relative;z-index: 1;background-image: url('../public/img/page/fran/fran_box01_ellipse1.png')}
@@ -47,9 +49,9 @@
 .fran_box03 .cover_txt{top: 50%;margin-left: -218.5px;margin-top: -193.5px}
 .fran02_flow{margin-top: 25px}
 .fran02_flow .flow_item{margin-right: 16px}
-.fran02_img01{top: 282px;margin-left: -210px}
-.fran02_img02{top: 290px;margin-left: 40px}
-.fran02_img03{top: 234px;margin-left: -68px}
+.fran02_img01{top: 282px;margin-left: -210px; z-index: 2;}
+.fran02_img02{top: 290px;margin-left: 40px; z-index: 2;}
+.fran02_img03{top: 234px;margin-left: -68px; z-index: 2;}
 .fran03_cont{width: 212px;height: 212px;margin-top: 13px;border-radius: 50%;background-color: rgba(250,243,205,0.2)}
 .fran03_cir01, .fran03_cir02, .fran03_cir03{border-radius: 50%;font-weight: 800;color: #fff;text-align: center}
 .fran03_cir01, .fran03_cir02{width: 45px;height: 45px;background-color: rgba(250,243,205,0.3);font-size: 16px;line-height: 45px}
