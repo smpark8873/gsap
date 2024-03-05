@@ -1,10 +1,9 @@
 
 import React, { useRef } from 'react';
-import Marquee from "react-fast-marquee";
 import gsap from "gsap"; 
-import { useGSAP } from "@gsap/react"; 
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import Marquee from "react-fast-marquee";
 
 
 function Fran() {    

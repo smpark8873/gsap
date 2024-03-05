@@ -31,7 +31,6 @@
 .fran_box .box_txt em{font-weight: 700}
 .fran_box .cover_img{top: 50%;display: flex; justify-content: center;align-items: center;width: 100%;transform: translate(-50%, -50%)}
 .fran_box .box_cover { z-index: 3; }
-/* .fran_box:hover .box_cover { transform: scale(0) !important; transform-origin: center;} */
 .box01_shapes{display: flex;align-items: center;bottom: 17px;width: 536px;height: 157px;margin-left: -268px}
 .box01_shapes .ellipse{display: flex;justify-content: center;align-items: center;width: 147px;height: 100px;background-repeat: no-repeat;font-weight: 700;font-size: 20px;line-height: 1.6;color: #faf3cd;text-align: center}
 .box01_shapes .shape1{position: relative;z-index: 1;background-image: url('../public/img/page/fran/fran_box01_ellipse1.png')}

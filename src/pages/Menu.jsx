@@ -1,15 +1,18 @@
+// import React, { useRef } from 'react';
+// import gsap from "gsap"; 
+// import { useGSAP } from "@gsap/react"; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Autoplay } from 'swiper/modules';
 
 
-function Menu () {
+function Menu () {    
     return(
         <section className="menu bg-cover">
             <div className="menu_slide rel">
                 <span className="menu_sl_bg l50"><img src="/img/page/fran/menu_sl_bg.png" alt="" /></span>
                 <Swiper
-                    slidesPerView={'auto'}                           
-                    loop={true}                      
+                    slidesPerView={'auto'}
+                    loop={true}
                     centeredSlides={true}
                     allowTouchMove={true}
                     speed={800} 

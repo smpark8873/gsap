@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {  Autoplay, EffectFade } from 'swiper/modules';
 import gsap from "gsap"; 
 import { useGSAP } from "@gsap/react"; 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {  Autoplay, EffectFade } from 'swiper/modules';
+
 
 function Ease() {
     const container = useRef();  
@@ -15,7 +16,7 @@ function Ease() {
             gsap.from('.easy_food01', {scale: 0, y: '100%', x: '100%', rotate: 90, ease: 'back.out'}),
             gsap.from('.easy_food02', {scale: 0, y: '100%', x: '-80%', rotate: -90, ease: 'back.out'}),
         ], 0.5)
-        introTl.from('.easy_ttls .ttl_up', {y: '100%', stagger: 0.25}, '-=0.3');  
+        introTl.from('.easy_ttls .ttl_up', {y: '100%', stagger: 0.25}, '-=0.3');
         introTl.call(() => {
             const elems = q('.easy_nums .num');
             const opt = {
@@ -68,7 +69,6 @@ function Ease() {
 
             play();
         })
-
     }, { scope: container }) 
 
     return(
@@ -95,7 +95,7 @@ function Ease() {
                         <div className="easy_slide l50">
                             <span className="easy_rotate rotate abs"><img src="/img/page/fran/easy_rotate.png" alt="" /></span>
                             <Swiper
-                                // effect={'fade'}
+                                effect={'fade'}
                                 loop = {true}
                                 pagination={{
                                 clickable: true,
