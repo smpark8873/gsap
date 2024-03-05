@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function Fran() {    
     const container = useRef();
+    const q = gsap.utils.selector(container);
     gsap.registerPlugin(ScrollTrigger);   
 
     useGSAP(() => {
@@ -21,47 +22,51 @@ function Fran() {
         .from('.fran_box01 .box_cover', {y: '-100%', duration: 0.7})
         .from('.fran_box02 .box_cover', {y: '100%', duration: 0.7}, '-=0.5')
         .from('.fran_box03 .box_cover', {y: '-100%', duration: 0.7}, '-=0.5') 
-        // .addLabel('franTl')
-        // .call(function() {
-        //     $('.fran_box').mouseenter(function() {
-        //         $('.fran_box').removeClass('on');
-        //         $(this).addClass('on');
-        //         var thisCover = $(this).find('.box_cover');
-        //         var franCover = $('.fran_box:not(.on)').find('.box_cover')
-        //         gsap.to(thisCover, {opacity: 0, scale: 0})
-        //         gsap.to(franCover, {opacity: 1, scale: 1})
+        .addLabel('franTl')
+        .call(function() {
+            q(".fran_box").forEach((el, i) => {
+                el.addEventListener('mouseenter', function() {
+                    q('.fran_box').forEach((el) => {
+                        el.classList.remove('on');
+                    })
+                    el.classList.add('on');
+                    var thisCover = el.querySelector('.box_cover');
+                    var franCover = q('.fran_box:not(.on) .box_cover');
+                    gsap.to(thisCover, {opacity: 0, scale: 0})
+                    gsap.to(franCover, {opacity: 1, scale: 1})
 
-        //         var tl01 = gsap.timeline({paused: true});
-        //         tl01.fromTo('.box01_shapes .shape1', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.4})
-        //         tl01.fromTo('.box01_shapes .shape2', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.4}, '-=0.2')
-        //         tl01.fromTo('.box01_shapes .shape3', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.5}, '-=0.2')
+                    var tl01 = gsap.timeline({paused: true});
+                    tl01.fromTo('.box01_shapes .shape1', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.4})
+                    tl01.fromTo('.box01_shapes .shape2', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.4}, '-=0.2')
+                    tl01.fromTo('.box01_shapes .shape3', {opacity: 0, x: -100}, {opacity: 1, x: 0, duration: 0.5}, '-=0.2')
 
-        //         var tl02 = gsap.timeline({paused: true});
-        //         tl02.add([
-        //             gsap.fromTo('.fran02_img01', {rotate: 35, x: 100}, {rotate: 0, x: 0, ease: 'back.out'}),
-        //             gsap.fromTo('.fran02_img02', {rotate: -35, x: -120}, {rotate: 0, x: 0, ease: 'back.out'}),
-        //         ])
+                    var tl02 = gsap.timeline({paused: true});
+                    tl02.add([
+                        gsap.fromTo('.fran02_img01', {rotate: 35, x: 100}, {rotate: 0, x: 0, ease: 'back.out'}),
+                        gsap.fromTo('.fran02_img02', {rotate: -35, x: -120}, {rotate: 0, x: 0, ease: 'back.out'}),
+                    ])
 
-        //         var tl03 = gsap.timeline({paused: true});
-        //         tl03.fromTo('.fran03_cir', {scale: 0}, {scale: 1, ease: 'back.out', stagger: 0.2})
-        //         tl03.fromTo('.fran03_txts', {opacity: 0, y: 100}, {opacity: 1, y: 0}, '-=0.3')
+                    var tl03 = gsap.timeline({paused: true});
+                    tl03.fromTo('.fran03_cir', {scale: 0}, {scale: 1, ease: 'back.out', stagger: 0.2})
+                    tl03.fromTo('.fran03_txts', {opacity: 0, y: 100}, {opacity: 1, y: 0}, '-=0.3')
 
-        //         var index = $(this).index();
-        //         switch (index) {
-        //             case 0:
-        //                 tl01.restart();
-        //                 break;
+                    switch (i) {
+                        case 0:
+                            tl01.restart();
+                            break;
 
-        //             case 1:
-        //                 tl02.restart();
-        //                 break;
+                        case 1:
+                            tl02.restart();
+                            break;
 
-        //             case 2:
-        //                 tl03.restart();
-        //                 break;
-        //         }
-        //     })
-        // }, null, 'franTl')
+                        case 2:
+                            tl03.restart();
+                            break;
+                    }
+                }
+                )
+            })
+        }, null, 'franTl')
 
     }, { scope: container }) 
     
