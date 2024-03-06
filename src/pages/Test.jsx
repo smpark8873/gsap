@@ -127,6 +127,29 @@ function Test () {
 
         //"+=" 및 "-=" 위치 매개 변수를 사용하는 상대 트윈은 타임라인 끝을 기준으로 배치됩니다. 이는 항상 타임라인의 이전 트윈일 필요는 없습니다.
 
+
+        // ### 타임라인 제어 및 라벨
+        // 타임라인에는 트윈과 정확히 동일한 제어 방법이 있습니다. 트윈을 play()하는 방법을 이미 알고 있으므로 타임라인을 play()하는 방법도 이미 알고 있습니다.
+        // 먼저 다음과 같이 타임라인에 대한 참조를 만들어야 합니다.
+
+        var animation = gsap.timeline()
+        
+        // later on you can do
+        animation.play();
+        animation.pause();
+        animation.restart();
+        animation.reverse();
+        animation.play("test");
+
+        //etc
+        //라벨을 사용하면 타임라인의 특정 시점을 표시할 수 있습니다. 
+        //add() 메소드를 사용하여 타임라인에 라벨을 추가할 수 있습니다.
+
+        // .from("#freds img", {y:160, stagger:0.5, duration:0.8, ease:"back"}, "+=0.5")
+        // .add("test")
+        // .from("#time", {xPercent:100, duration:1, ease:"bounce"});
+
+
     return(         
         <>
             <div class="green"></div>
