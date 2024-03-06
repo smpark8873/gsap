@@ -38,7 +38,7 @@ function Balance () {
         }, null, 3)  
               
 
-    }, { scope: container }) 
+    }, { }) 
 
     return(         
         <section className="balance rel over_h" id="balance" ref={container}>
