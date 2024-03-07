@@ -4,7 +4,7 @@ import { useGSA, GSDevTools } from "@gsap/react";
 
 function Test () {
     
-    var output = document.querySelector("#output");
+    const output = document.querySelector("#output");
     gsap.registerPlugin(GSDevTools); 
 
     gsap.to(".green", {
@@ -30,7 +30,7 @@ function Test () {
     output.innerHTML += message + "<br />"
     }
 
-    var tween = gsap.to(".pink", {duration:1, x:100});
+    const tween = gsap.to(".pink", {duration:1, x:100});
     tween.pause(); //일시 중지
     tween.resume(); //다시시작(방향전환 - 역방향 또는 역방향 제외)
     tween.reverse(); //역방향(항상 처음으로 돌아감)
@@ -104,7 +104,7 @@ function Test () {
 
 
     // ### 트윈 컨트롤
-    var tween3 = gsap.to(".green", {duration:3, x:600, ease:"linear", paused:true});
+    const tween3 = gsap.to(".green", {duration:3, x:600, ease:"linear", paused:true});
     document.getElementById("play").onclick = ()=> tween3.play();
     document.getElementById("pause").onclick = ()=> tween3.pause();
     document.getElementById("reverse").onclick = ()=> tween3.reverse();
@@ -115,8 +115,8 @@ function Test () {
     // const circle = document.querySelector(".circle")
     // const bg = document.querySelector(".bg")
 
-    // let getter = gsap.getProperty(bg);
-    // let x = getter('width','vw')
+    // const getter = gsap.getProperty(bg);
+    // const x = getter('width','vw')
 
     // console.log(x)
 
@@ -127,12 +127,12 @@ function Test () {
     // })
 
      // ### 요소 속성의 현재 값 얻기
-     let w = gsap.getProperty(".green", "width"); //선택기 텍스트를 사용 할 수 있다.
-     let bgColor = gsap.getProperty(".orange", "backgroundColor"); //또는 변수 참조를 사용할 수 있다.
+     const w = gsap.getProperty(".green", "width"); //선택기 텍스트를 사용 할 수 있다.
+     const bgColor = gsap.getProperty(".orange", "backgroundColor"); //또는 변수 참조를 사용할 수 있다.
  
      // this.targets() 와 함께 사용됩니다.
      gsap.to(".pink", {x: 100, onUpdate: function() {
-         let elem = this.targets()[0];
+         const elem = this.targets()[0];
  
          console.log(gsap.getProperty(elem,"x"));
      } });
@@ -150,11 +150,11 @@ function Test () {
     // 하지만, 어떤 공부든 공식문서를 통해 정보를 습득하는 습관을 가지는게 제일 바람직한 공부방법입니다.
 
 
-    var tween2 = gsap.to(".orange", {duration: 1, x: 100});
+    const tween2 = gsap.to(".orange", {duration: 1, x: 100});
     console.log(tween2.daration()); 
     tween2.duration(2);
 
-    var tl2 = gsap.timeline();
+    const tl2 = gsap.timeline();
     tl2.to(".green", {duration: 5, x: 200})
     .to(".orange", {duration: 5, x: 200});
 
@@ -188,54 +188,126 @@ function Test () {
     // 타임라인에는 트윈과 정확히 동일한 제어 방법이 있습니다. 트윈을 play()하는 방법을 이미 알고 있으므로 타임라인을 play()하는 방법도 이미 알고 있습니다.
     // 먼저 다음과 같이 타임라인에 대한 참조를 만들어야 합니다.
 
-        var animation = gsap.timeline()
+    // Label을 사용하면 타임라인에서 특정 지점으로 이동할 수 있습니다.
+    // `add()` 메서드를 사용하여 타임라인에 Label을 추가할 수 있습니다.    
+    // .from("#freds img", {y:160, stagger:0.5, duration:0.8, ease:"back"}, "+=0.5")
+    // .add("test")
+    // .from("#time", {xPercent:100, duration:1, ease:"bounce"});
+    
+    const animation = gsap.timeline()
+    
+    // later on you can do
+    animation.play();
+    animation.pause();
+    animation.restart();
+    animation.reverse();
+    animation.play("test");
+       
+    // 예제
+    // const tll = gsap.timeline({paused:true});
+
+    // tll.from('.sun',{duration:3,opacity:0,x:50,y:50})
+    // tll.from('.land',{duration:1,opacity:0},'-=1.5')
+    // tll.from('.gress',{duration:1,opacity:0,y:100,stagger:{
+    // each:0.2,
+    // from:"center"
+    // }})
+    // tll.add('test')
+    // tll.from('.bird',{duration:1,opacity:0,y:100},'<')
+    // tll.from('.music',{duration:1,opacity:0,x:100,y:100},3)
+    // tll.from('.eye-left,.eye-right',{duration:1,x:30,repeat:-1,yoyo:true})
+    // tll.to('.mouse',{scaleY:0,transformOrigin:'center center',repeat:-1,yoyo:true},'<')
+
+
+    // ### 단일 메뉴 효과 
+    // 단일 대상의 색상이나 크기를 변경하는것과 같이 간단한 애니메이션을 적용하려면 CSS만 있어도 충분히 원하는 결과를 얻을 수 있습니다.
+    // 그러나 정확한 타이밍이 필요한 여러 객체들을 컨트롤 하거나 재생,되돌아가기,속도,가속도 설정과 같은 작업을 수행하기 위해선 GSAP의 애니메이션 코드가 훨씬 더 많은 유연성을 제공합니다.
+
+
+    // ### 다중 메뉴 효과
+    // 이번 파트에서 가장 중요한 요소는 각 항목에 대한 타임라인을 작성하는 `forEach()` 루프를 만드는 것입니다.
+    // `item.querySelector()`를 사용하여 타임라인안에 필요한 `.dash`와 `.text` 요소를 찾습니다.    
+    // 반복문 안에 있는 동안 각각의 타임라인에 `play()`와 `reverse()` 메서드를 마우스 이벤트를 통해 바인딩 합니다.
+    // https://codepen.io/gkclxlnq-the-sans/pen/gOyaQJK?editors=0110
+    // const items = document.querySelectorAll('.item');
+    // gsap.defaults({duration: 0.3})
+
+    // items.forEach((item)=>{
+    //     let tl = gsap.timeline({paused:true});
+    
+    //     tl.to(item.querySelector('.text'),{color:"#fff",x:15})
+    //     tl.to(item.querySelector('.dash'),{opacity:1,x:-5,backgroundColor:"yellow"},0); 
+
+    //     item.addEventListener('mouseenter',()=>{tl.play()})
+    //     item.addEventListener('mouseleave',()=>{tl.reverse()})
+    // })
+
+
+
+    // ### Hover Pulse Animation 
+    // 부드럽게 멈추거나 다시 반복되는 애니메이션의 대한 이슈는 GreenSock 포럼과 Stackoverflow에 굉장히 자주 등장하는 주제입니다.
+    // https://codepen.io/gkclxlnq-the-sans/pen/vYMNvYR
+
+
+    // ### 타임라인 default - 가벼운 설정     ease, duration 정도만 쓰기 !!!!
+
+    // const tl = gsap.timeline({defaults:{opacity:0, ease:'back'}})
+    // tl.from('.stage',{ease:'linear'})
+    //   .from('h1',{x:-50})
+    //   .from('h2',{x:50})
+    //   .from('p',{x:-50})
+    //   .from('button',{y:30})
+    //   .from('.planet > img',{scale:0,stagger:0.1})
+
+    // GSDevTools
+    // GSDevTools은 애니메이션을 scrub하고 속도를 변경해볼 수 있으며, 특정 구간 반복등 애니메이션 작업에 있어 굉장히 편리한 컨트롤러를 제공합니다.
+    // GSDevTools는 Club GreenSock 회원을 위한 보너스 도구 (유료) 지만 CodePen에서 무료로 사용할 수 있습니다.
+    // 플러그인 추가후 하단에 GSDevTools.create(); 
+
+
+    //  ###fouc
+    //  Flash of Un-styled Content (FOUC) 는 스타일이 지정되어 있지 않은 요소들이 화면에 랜더링 될 경우 콘텐츠의 깜빡이는 플래시 효과를 나타내는 용어 입니다.
+
+    // 가장 일반적으로 웹폰트가 로드되기 전에 페이지 렌더링 상태에서 기본 글꼴이 나오고 적용된 웹폰트로 변경되는 모습을 상상하시면 됩니다. 
+
+    // 사용자에게 가장 빠른 로딩 경험을 제공 하기 위해 <body> 태그 끝나기 전에 사용자 정의 스크립트를 로드하는 것이 좋고 또는 defer 명령어를 사용하는 것도 좋은 방법중 하나 입니다. 
+
+    // 하지만 우리 수업에서는 GSAP과 Javascript를 사용하여 FOUC를 제거해봅니다.
+
+    // FOUC를 피하기 위한 단계별 수행 항목
+
+    // - 보이지 않아야 할 요소를 감싸고 있는 전체 부모 요소에게 CSS visibility: hidden 속성 부여하기
+    // - GSAP의 Special 속성인 autoAlpha : 0 설정
+    // - 애니메이션 코드를 init() 함수로 래핑
+    // - 로드 이벤트 리스너를 사용하여 페이지가 로드 된 후 init() 함수를 호출
+
+
+
+      
+    // const tl = gsap.timeline({ repeat:4, yoyo:true, defaults:{opacity:0, ease:"back"}});
+    // gsap.set("#demo", {rotationY:15})
+    // function init() {
+    //     tl.from("#demo", {ease:"linear", autoAlpha:0})
+    //     .from("h1", {x:80, duration:1})
+    //     .from("h2", {x:-80, duration:1}, "<")
+    //     .from("p", {y:30}, "-=0.2")
+    //     .from("button", {y:50}, "-=0.4") 
+    //     .from("#items > g", {scale:0, transformOrigin:"50% 50%", stagger:0.1}, "-=0.5")
+    // }
+
+    // window.addEventListener("load", function(event) { 
+    // init(); //do stuff
+    // GSDevTools.create({animation:tl})
+    // });
+
+
+     // ### 텍스트 플러그인 : https://gsap.com/docs/v3/Plugins/TextPlugin#cdn-link
+
+    //  ### 키프레임 파헤치기 chapter 1
+    // GSAP 3.9 버전이 업데이트 되면서 키프레임 구문에  대한 완전히 새로운 접근 방식으로 들어갑니다.
+    // 예전부터 GreenSock 팀은 키프레임의 대해 많은 이야기를 다뤄왔었습니다. 
+    // 그래서 이번 강의에서는 키프레임을 보다 깊게 이해하고 다루는 시간을 가져보도록 하겠습니다.
         
-        // later on you can do
-        animation.play();
-        animation.pause();
-        animation.restart();
-        animation.reverse();
-        animation.play("test");
-
-        //etc
-        //라벨을 사용하면 타임라인의 특정 시점을 표시할 수 있습니다. 
-        //add() 메소드를 사용하여 타임라인에 라벨을 추가할 수 있습니다.
-
-        // .from("#freds img", {y:160, stagger:0.5, duration:0.8, ease:"back"}, "+=0.5")
-        // .add("test")
-        // .from("#time", {xPercent:100, duration:1, ease:"bounce"});
-
-        //  ### 플래시를 방지하려면 다음과 같은 몇 가지 조치를 취해야 합니다.
-
-        // 1. CSS 스타일의 가시성:숨김을 제공하여 모든 요소가 포함된 <div>를 숨깁니다.
-
-        // 2. autoAlpha:0 에서 페이드 인되는 gsap 애니메이션 코드 만들기
-
-        // 3. 애니메이션 코드를  init()  함수로 래핑합니다.
-
-        // 4. 로드 이벤트 리스너를 사용하여 페이지가 로드된 후 init() 함수 호출
-
-        // var tl = gsap.timeline({ repeat:4, yoyo:true, defaults:{opacity:0, ease:"back"}});
-        // gsap.set("#demo", {rotationY:15})
-        // function init() {
-        //     tl.from("#demo", {ease:"linear", autoAlpha:0})
-        //     .from("h1", {x:80, duration:1})
-        //     .from("h2", {x:-80, duration:1}, "<")
-        //     .from("p", {y:30}, "-=0.2")
-        //     .from("button", {y:50}, "-=0.4") 
-        //     .from("#items > g", {scale:0, transformOrigin:"50% 50%", stagger:0.1}, "-=0.5")
-        // }
-
-        // window.addEventListener("load", function(event) { 
-        // init(); //do stuff
-        // GSDevTools.create({animation:tl})
-        // });
-
-
-        // ### 텍스트 플러그인 : https://gsap.com/docs/v3/Plugins/TextPlugin#cdn-link
-
-
-        GSDevTools.create();
 
     return(         
         <>
