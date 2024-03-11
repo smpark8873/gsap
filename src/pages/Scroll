@@ -1,0 +1,43 @@
+// import React, { useRef } from 'react';
+// import gsap from "gsap"; 
+// import { useGSAP } from "@gsap/react";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styled from "styled-components";
+
+const Wrap = styled.div`
+    width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+
+`;
+
+
+function Scroll () {
+    // const container = useRef();  
+    // gsap.registerPlugin(ScrollTrigger);  
+
+    return(         
+       <Wrap>
+            <section>
+                <h1>Intro</h1>
+                ### Start! ScrollTrigger
+
+                ### GSAP + WebAnimation API
+
+                ### ScrollTrigger
+            </section>
+
+            <section>
+                <h1>Basic Trigger</h1>
+                ### 환경설정
+            </section>
+
+            <section>
+                <h1>HTMLHeadElement</h1>
+                ### 
+            </section>
+       </Wrap>
+    );
+}
+
+export default Scroll;
