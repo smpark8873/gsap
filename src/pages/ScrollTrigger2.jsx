@@ -2,8 +2,8 @@
 import gsap from "gsap"; 
 // import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ScrollToPlugin from "gsap/ScrollToPlugin";
-import Scrollbar from 'smooth-scrollbar';
+// import ScrollToPlugin from "gsap/ScrollToPlugin";
+// import Scrollbar from 'smooth-scrollbar';
 
 
 // import imagesLoaded from 'imagesloaded';
@@ -12,7 +12,7 @@ import '../scrollTrigger2Style.css';
 
 
 function ScrollTrigger2 () {    
-    gsap.registerPlugin(ScrollTrigger,ScrollToPlugin);
+    // gsap.registerPlugin(ScrollTrigger,ScrollToPlugin);
 
     // const container = document.querySelector('#container');
 
