@@ -25,7 +25,8 @@ import React from 'react';
 // import Story from './pages/Story';
 
 
-import Scroll from './pages/Scroll';
+// import Scroll from './pages/Scroll';
+import ScrollTrigger2 from './pages/ScrollTrigger2';
 
 
 //style
@@ -65,7 +66,8 @@ function App() {
         //     <Footer />
         // </div>
         <>
-            <Scroll />
+            {/* <Scroll /> */}
+            <ScrollTrigger2 />
         </>
     );
 }
