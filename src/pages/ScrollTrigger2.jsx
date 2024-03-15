@@ -50,8 +50,7 @@ function ScrollTrigger2 () {
     //     //     gsap.set(markers, { marginTop: -offset.y });
     //     //   });
     //     }   
-    // }
-      
+    // }      
 
     const theme = {
         primary: "#6067f3",
