@@ -80,6 +80,7 @@ function ScrollTrigger2 () {
           width:'100%',
           yPercent:-90
         })
+        
       
         ScrollTrigger.create({
           trigger: '.hero',
