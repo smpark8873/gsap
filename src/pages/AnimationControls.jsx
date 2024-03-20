@@ -15,6 +15,10 @@ function AnimationControls () {
     return (         
        <>
         <h2>animation controls</h2>
+            
+
+
+
        </>
       
    );
