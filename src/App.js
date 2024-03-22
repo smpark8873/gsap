@@ -26,8 +26,9 @@ import React from 'react';
 
 
 // import Scroll from './pages/Scroll';
-import ScrollTrigger2 from './pages/ScrollTrigger2';
-import AnimationControls from './pages/AnimationControls';
+// import ScrollTrigger2 from './pages/ScrollTrigger2';
+// import AnimationControls from './pages/AnimationControls';
+import TestScroll from './pages/TestScroll';
 
 
 
@@ -69,8 +70,9 @@ function App() {
         // </div>
         <>
             {/* <Scroll /> */}
-            <ScrollTrigger2 />
-            <AnimationControls />
+            {/* <ScrollTrigger2 />
+            <AnimationControls /> */}
+            <TestScroll />
         </>
     );
 }
