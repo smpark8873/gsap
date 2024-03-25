@@ -14,9 +14,42 @@
     }
     p { 
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap;       
         font-size: 150px;
         line-height: 152px;
         font-weight: 900;
     }
 }
+
+.wrapper{
+    width:100%;
+   
+    position:relative;
+    margin:auto;
+    background:#ccc;
+    overflow:hidden;
+  }
+  
+  .wrapper::after {
+    width:100%;
+  
+    content:"";
+    position:absolute;
+    border:solid 1px white;
+  }
+  
+  .box{   
+    position:absolute;
+    background:red;
+    font-size: 150px;
+    line-height: 152px;
+    text-align:center;    
+  } 
+  
+  
+  .boxes {
+    position:relative;
+    left:-50px;
+  }
+  
+ 
