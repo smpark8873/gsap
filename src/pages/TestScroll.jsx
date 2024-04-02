@@ -63,7 +63,7 @@ function TestScroll () {
             <div class="box">6</div>
             <div class="box">7</div>
             <div class="box">8</div>
-            <div class="box">오늘은 왜 ??</div>
+            <div class="box">공부할 시간이 없다</div>
             <div class="box"></div>
         </div>
     </div>
