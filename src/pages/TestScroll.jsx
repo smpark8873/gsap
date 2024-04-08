@@ -26,6 +26,7 @@ function TestScroll () {
           <h1 className='logo'>ABCDEFGHIJKLMNOPQRSTUVWXYZ</h1>
         </section>
         <section className='page page02'>
+          공부 하자
         </section>
         <section className='page page03'>
           
