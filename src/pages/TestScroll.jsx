@@ -29,7 +29,7 @@ function TestScroll () {
           공부 하자
         </section>
         <section className='page page03'>
-          
+          공부 할 시간이 없네 
         </section>
         <section className='page page04'>
           
