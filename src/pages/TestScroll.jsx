@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */ 
 
-import React, { useState } from 'react';
+import React from 'react';
 import gsap from "gsap"; 
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,173 +10,195 @@ import '../test.css';
 function TestScroll () { 
     gsap.registerPlugin(ScrollTrigger);  
     
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 
     useGSAP(() => {
       
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
+      // const handleResize = () => {
+      //   setWindowWidth(window.innerWidth);
+      // };
   
-      window.addEventListener('resize', handleResize);
+      // window.addEventListener('resize', handleResize);
   
-      // 컴포넌트가 unmount될 때 이벤트 리스너 제거
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
+      // // 컴포넌트가 unmount될 때 이벤트 리스너 제거
+      // return () => {
+      //   window.removeEventListener('resize', handleResize);
+      // };
+
+      ScrollTrigger.create({
+        trigger: '.nav_container',
+        start: 'top top',
+        // endTrigger: '.footer',
+        end: 'max',
+        pin: true,   
+        pinSpacing: false,
+      })
+
+      gsap.set('.logo',{
+        width: '100%',
+        yPercent: -90
+      })
+    
+      ScrollTrigger.create({
+        trigger: '.hero',
+        start : 'top top',
+        end: 'bottom 20%',
+        animation: gsap.to('.logo', {width: '12%', yPercent: 0}),    
+        scrub: true,
+      })
 
 
-      const theme = {
-        primary: "#6067f3",
-        secondary: "#e8e2da",
-      };
+      // const theme = {
+      //   primary: "#6067f3",
+      //   secondary: "#e8e2da",
+      // };
       
-      const keywords = ['Jeju','Yang-yang','Mokpo','Busan']
+      // const keywords = ['Jeju','Yang-yang','Mokpo','Busan']
       
-      function fixedHeader() {
-        ScrollTrigger.create({
-          trigger: '.nav_container',
-          start: 'top top',
-          // endTrigger: '.footer',
-          end: 'max',
-          pin: true,   
-          pinSpacing: false,
-        })
-      }
+      // function fixedHeader() {
+      //   ScrollTrigger.create({
+      //     trigger: '.nav_container',
+      //     start: 'top top',
+      //     // endTrigger: '.footer',
+      //     end: 'max',
+      //     pin: true,   
+      //     pinSpacing: false,
+      //   })
+      // }
       
-      function hereAnimation() {
-        gsap.set('.logo',{
-          width: '100%',
-          yPercent: -90
-        })
+      // function hereAnimation() {
+      //   gsap.set('.logo',{
+      //     width: '100%',
+      //     yPercent: -90
+      //   })
       
-        ScrollTrigger.create({
-          trigger: '.hero',
-          start : 'top top',
-          end: 'bottom 20%',
-          animation: gsap.to('.logo', {width: '12%', yPercent: 0}),    
-          scrub: true,
-        })
+      //   ScrollTrigger.create({
+      //     trigger: '.hero',
+      //     start : 'top top',
+      //     end: 'bottom 20%',
+      //     animation: gsap.to('.logo', {width: '12%', yPercent: 0}),    
+      //     scrub: true,
+      //   })
       
-      }
+      // }
       
-      function textAnimation() {
+      // function textAnimation() {
       
       
-        gsap.utils.toArray('.header_text-wrap').forEach((text,index)=>{
+      //   gsap.utils.toArray('.header_text-wrap').forEach((text,index)=>{
           
-          const target = text.querySelector('.header_text-move');
+      //     const target = text.querySelector('.header_text-move');
          
-          // const [x,xEnd] = index % 2 ? [innderWidth, 0] : [-innerWidth, 0]
+      //     // const [x,xEnd] = index % 2 ? [innderWidth, 0] : [-innerWidth, 0]
       
-          ScrollTrigger.create({
-            trigger: text,
-            start: 'top center',
-            end: 'bottom center',
-            animation: gsap.fromTo(text,{ x: index % 2 ? windowWidth : -windowWidth },{ x:0 }),
-            scrub: true,
-          })
-        })
-      }
+      //     ScrollTrigger.create({
+      //       trigger: text,
+      //       start: 'top center',
+      //       end: 'bottom center',
+      //       animation: gsap.fromTo(text,{ x: index % 2 ? windowWidth : -windowWidth },{ x:0 }),
+      //       scrub: true,
+      //     })
+      //   })
+      // }
       
-      function maskAnimation() {
+      // function maskAnimation() {
       
-        const cirleTween = gsap.timeline()
-        .to('.circle_element',{
-          borderRadius: 0,
-          width: windowWidth,
-          height: window.innerHeight,
-        })
-        .add(changeTheme(), 0)
+      //   const cirleTween = gsap.timeline()
+      //   .to('.circle_element',{
+      //     borderRadius: 0,
+      //     width: windowWidth,
+      //     height: window.innerHeight,
+      //   })
+      //   .add(changeTheme(), 0)
       
       
-        ScrollTrigger.create({
-          trigger: '.circle_wrap',
-          start: 'top top',
-          end: '+=2000',
-          animation: cirleTween,
-          pin: true,
-          scrub: true,
-        })
-      }
+      //   ScrollTrigger.create({
+      //     trigger: '.circle_wrap',
+      //     start: 'top top',
+      //     end: '+=2000',
+      //     animation: cirleTween,
+      //     pin: true,
+      //     scrub: true,
+      //   })
+      // }
       
-      function categorieAnimation() {
+      // function categorieAnimation() {
       
-        const tween = gsap.from('.categories > a', {
-          opacity: 0,
-          filter: 'blur(3px)',
-          stagger: {
-            each: 0.1,
-            from: 'random'
-          }
-        })
+      //   const tween = gsap.from('.categories > a', {
+      //     opacity: 0,
+      //     filter: 'blur(3px)',
+      //     stagger: {
+      //       each: 0.1,
+      //       from: 'random'
+      //     }
+      //   })
       
-        ScrollTrigger.create({
-          trigger: '.catories_container',
-          start: 'top top',
-          end: '+=2000',
-          animation: tween,
-          pin: true,   
-        })
-      }
+      //   ScrollTrigger.create({
+      //     trigger: '.catories_container',
+      //     start: 'top top',
+      //     end: '+=2000',
+      //     animation: tween,
+      //     pin: true,   
+      //   })
+      // }
       
-      function changeTheme(themeMode ='light') {
-        const tween = gsap.to('body, .nav_container', {
-          backgroundColor: themeMode === 'light' ? theme.secondary : theme.primary, 
-          color: themeMode === 'light' ? theme.primary : theme.secondary
-        }, 0)
+      // function changeTheme(themeMode ='light') {
+      //   const tween = gsap.to('body, .nav_container', {
+      //     backgroundColor: themeMode === 'light' ? theme.secondary : theme.primary, 
+      //     color: themeMode === 'light' ? theme.primary : theme.secondary
+      //   }, 0)
       
-        return tween
-      }
+      //   return tween
+      // }
       
-      function gallaryAnimation() {
+      // function gallaryAnimation() {
       
-        ScrollTrigger.create({
-          trigger: '.text_container',
-          start: 'top top',
-          endTrigger:'.image_container',
-          end: 'bottom bottom',
-          animation: gsap.to('.front_image',{yPercent:-20}), 
-          pin: true,
-          pinSpacing: false,
-          markers: true,
-          scrub: true,
-          onUpdate: ({progress})=>{
+      //   ScrollTrigger.create({
+      //     trigger: '.text_container',
+      //     start: 'top top',
+      //     endTrigger:'.image_container',
+      //     end: 'bottom bottom',
+      //     animation: gsap.to('.front_image',{yPercent:-20}), 
+      //     pin: true,
+      //     pinSpacing: false,
+      //     markers: true,
+      //     scrub: true,
+      //     onUpdate: ({progress})=>{
       
-            const ratio = Math.round(progress * 100);
+      //       const ratio = Math.round(progress * 100);
       
-            let index= 0;
-            let mode = 'light';
+      //       let index= 0;
+      //       let mode = 'light';
             
-            if(ratio > 0 && ratio < 25){
-              index = 0;       
-            } else if(ratio >= 25 && ratio < 50) {
-              index = 1;
-              mode="dark"
+      //       if(ratio > 0 && ratio < 25){
+      //         index = 0;       
+      //       } else if(ratio >= 25 && ratio < 50) {
+      //         index = 1;
+      //         mode="dark"
               
-            }else if(ratio >= 50 && ratio < 75) {
-              index = 2;
-              mode="light"
-            } else {
-              index = 3;
-              mode="dark"
-            }   
+      //       }else if(ratio >= 50 && ratio < 75) {
+      //         index = 2;
+      //         mode="light"
+      //       } else {
+      //         index = 3;
+      //         mode="dark"
+      //       }   
            
-            changeTheme(mode);
-            document.querySelector('.text_container span').textContent = keywords[index]
+      //       changeTheme(mode);
+      //       document.querySelector('.text_container span').textContent = keywords[index]
       
-          }
-        })
-      }
+      //     }
+      //   })
+      // }
       
       
-      fixedHeader();
-      hereAnimation();
-      textAnimation();
-      maskAnimation();
-      categorieAnimation();
-      gallaryAnimation();
+      // fixedHeader();
+      // hereAnimation();
+      // textAnimation();
+      // maskAnimation();
+      // categorieAnimation();
+      // gallaryAnimation();
   
       
       
