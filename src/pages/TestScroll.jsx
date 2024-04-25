@@ -198,9 +198,7 @@ function TestScroll () {
       // textAnimation();
       // maskAnimation();
       // categorieAnimation();
-      // gallaryAnimation();
-  
-      
+      // gallaryAnimation();  
       
 
         
